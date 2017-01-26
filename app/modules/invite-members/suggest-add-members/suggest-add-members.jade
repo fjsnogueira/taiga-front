@@ -1,9 +1,10 @@
 .add-member-suggest
     .add-member-suggest-filter
         input.add-member-suggest-filter-input(
-            type="email"
-            ng-model="vm.inviteSuggestion"
+            type="text"
+            ng-model="vm.filterContactQuery"
             placeholder="Filter or write email"
+            ng-keyup="vm.filterContacts()"
         )
         button.add-member-suggest-filter-addmail(
             ng-click="vm.inviteEmail(vm.inviteSuggestion)"
@@ -11,7 +12,7 @@
             tg-svg(svg-icon="icon-add-user")
     ul.add-member-suggest-list
         li.add-member-suggest-single(
-            tg-repeat="contact in vm.contacts"
+            tg-repeat="contact in vm.filteredContacts"
             ng-click="vm.inviteSuggested({contact: contact})"
         )
             img.add-member-suggest-avatar(

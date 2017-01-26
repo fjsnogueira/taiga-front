@@ -1,12 +1,12 @@
-.invite-members-form(ng-show="vm.displayContactList")
+.invite-members-form
     ul.invite-members-form-list
         li.invite-members-single(
-            ng-repeat="contact in vm.contactsToInvite track by contact.id"
+            tg-repeat="contact in vm.contactsToInvite track by contact.get(id)"
         )
             .invite-members-single-data
                 img.invite-members-single-avatar(
                     tg-avatar="contact"
-                    alt="{{contact.full_name}}"
+                    alt="{{contact.get('full_name')}}"
                 )
                 span.invite-members-single-name {{::contact.full_name}}
                 a.invite-members-single-remove(

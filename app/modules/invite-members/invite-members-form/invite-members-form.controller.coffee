@@ -1,5 +1,5 @@
 ###
-# Copyright (C) 2014-2016 Taiga Agile LLC <taiga@taiga.io>
+# Copyright (C) 2014-2015 Taiga Agile LLC <taiga@taiga.io>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -14,18 +14,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# File: invite-members.directive.coffee
+# File: add-members.controller.coffee
 ###
 
-InviteMembersFormDirective = () ->
-    return {
-        scope: {},
-        templateUrl:"invite-members/invite-members-form/invite-members-form.html",
-        controller: "InviteMembersFormCtrl",
-        controllerAs: "vm",
-        bindToController: {
-            contactsToInvite: '='
-        }
-    }
+taiga = @.taiga
 
-angular.module("taigaAdmin").directive("tgInviteMembersForm", InviteMembersFormDirective)
+
+class InviteMembersFormController
+    @.$inject = []
+
+    constructor: () ->
+
+    # _getContacts: () ->
+    #     currentUser = @currentUserService.getUser()
+    #     @userService.getContacts(currentUser.get("id")).then (contacts) =>
+    #         @.contacts = contacts
+
+
+angular.module("taigaAdmin").controller("InviteMembersFormCtrl", InviteMembersFormController)

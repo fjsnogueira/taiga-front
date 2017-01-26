@@ -21,8 +21,18 @@ taiga = @.taiga
 
 
 class SuggestAddMembersController
-    @.$inject = []
+    @.$inject = [
+        "$filter"
+    ]
 
-    constructor: () ->
+    constructor: (@filter) ->
+
+    filterContacts: () ->
+        # @.filteredContacts = @filter('filter')(@.contacts.toJS(), @.filterContactQuery)
+        # @.filteredContacts = @filter('orderBy')(@.filteredContacts, 'name')
+        console.log @.contacts.size
+        @.filteredContacts = @.contacts.filter( (contact) =>
+            contact.get('full_name').includes(@.filterContactQuery);
+        )
 
 angular.module("taigaAdmin").controller("SuggestAddMembersCtrl", SuggestAddMembersController)
