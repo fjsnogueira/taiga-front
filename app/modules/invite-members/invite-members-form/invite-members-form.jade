@@ -1,0 +1,31 @@
+.invite-members-form(ng-show="vm.displayContactList")
+    ul.invite-members-form-list
+        li.invite-members-single(
+            ng-repeat="contact in vm.contactsToInvite track by contact.id"
+        )
+            .invite-members-single-data
+                img.invite-members-single-avatar(
+                    tg-avatar="contact"
+                    alt="{{contact.full_name}}"
+                )
+                span.invite-members-single-name {{::contact.full_name}}
+                a.invite-members-single-remove(
+                    href=""
+                    ng-click="vm.removeInvite(contact)"
+                )
+            select.invite-members-single-role(
+                ng-model="role[0]"
+                ng-options="role.id as role.name for role in vm.roles | toMutable"
+                id="add-member-suggest-role-dropdown"
+            )
+    .invite-members-single-new(ng-if="vm.contactsToInvite.length < 4")
+        tg-svg(
+            svg-icon="icon-add"
+            ng-click="vm.onDisplayContactList()"
+        )
+    textarea#invite-members-single-msg(
+        ng-model="vm.inviteContacts.message"
+    )
+    button.button-green.invite-members-single-send(
+        ng-click="vm.sendInvites(vm.inviteContacts)"
+    )

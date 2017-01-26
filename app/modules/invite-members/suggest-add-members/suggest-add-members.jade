@@ -1,0 +1,21 @@
+.add-member-suggest
+    .add-member-suggest-filter
+        input.add-member-suggest-filter-input(
+            type="email"
+            ng-model="vm.inviteSuggestion"
+            placeholder="Filter or write email"
+        )
+        button.add-member-suggest-filter-addmail(
+            ng-click="vm.inviteEmail(vm.inviteSuggestion)"
+        )
+            tg-svg(svg-icon="icon-add-user")
+    ul.add-member-suggest-list
+        li.add-member-suggest-single(
+            tg-repeat="contact in vm.contacts"
+            ng-click="vm.inviteSuggested({contact: contact})"
+        )
+            img.add-member-suggest-avatar(
+                tg-avatar="contact"
+                alt="{{contact.get('full_name')}}"
+            )
+            span.add-member-suggest-name {{contact.get('full_name')}}
