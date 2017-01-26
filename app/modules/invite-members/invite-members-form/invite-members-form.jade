@@ -18,6 +18,10 @@
                 ng-options="role.id as role.name for role in vm.roles | toMutable"
                 id="add-member-suggest-role-dropdown"
             )
+        li.invite-members-email(
+            ng-repeat="email in vm.emailsToInvite"
+        )
+            span.invite-members-single-email {{email}}
     .invite-members-single-new(ng-if="vm.contactsToInvite.length < 4")
         tg-svg(
             svg-icon="icon-add"

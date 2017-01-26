@@ -31,6 +31,7 @@ class AddMembersController
         @.roles = @projectService.project.get('roles')
         @.displayContactList = false
         @.contactsToInvite = Immutable.List()
+        @.emailsToInvite = []
         @._getContacts()
 
     _getContacts: () ->
@@ -46,6 +47,10 @@ class AddMembersController
     inviteSuggested: (contact) ->
         @.contactsToInvite = @.contactsToInvite.push(contact)
         @._filterContacts(contact)
+        @.displayContactList = true
+
+    inviteEmail: (email) ->
+        @.emailsToInvite = @.emailsToInvite.push(email)
         @.displayContactList = true
 
 angular.module("taigaAdmin").controller("AddMembersCtrl", AddMembersController)

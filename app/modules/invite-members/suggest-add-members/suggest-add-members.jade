@@ -1,13 +1,23 @@
 .add-member-suggest
-    .add-member-suggest-filter
+    form.add-member-suggest-filter
         input.add-member-suggest-filter-input(
             type="text"
-            ng-model="vm.filterContactQuery"
+            ng-model="vm.contactQuery"
             placeholder="Filter or write email"
             ng-keyup="vm.filterContacts()"
+            ng-if="vm.filteredContacts.size"
+        )
+        input.add-member-suggest-filter-input(
+            type="email"
+            ng-model="vm.contactQuery"
+            placeholder="Filter or write email"
+            ng-keyup="vm.filterContacts()"
+            ng-if="!vm.filteredContacts.size"
+            ng-attr-autofocus="{{!vm.filteredContacts.size}}"
         )
         button.add-member-suggest-filter-addmail(
-            ng-click="vm.inviteEmail(vm.inviteSuggestion)"
+            ng-click="vm.onInviteEmail({email: vm.contactQuery})"
+            ng-if="!vm.filteredContacts.size"
         )
             tg-svg(svg-icon="icon-add-user")
     ul.add-member-suggest-list
@@ -17,6 +27,6 @@
         )
             img.add-member-suggest-avatar(
                 tg-avatar="contact"
-                alt="{{contact.get('full_name')}}"
+                alt="{{contact.get('full_name_display')}}"
             )
-            span.add-member-suggest-name {{contact.get('full_name')}}
+            span.add-member-suggest-name {{contact.get('full_name_display')}}

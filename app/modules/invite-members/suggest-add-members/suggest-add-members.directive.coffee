@@ -26,7 +26,8 @@ SuggestAddMembersDirective = (lightboxService) ->
         bindToController: {
             contacts: '=',
             filteredContacts: '<contacts',
-            inviteSuggested: '&'
+            inviteSuggested: '&',
+            onInviteEmail: '&'
         }
     }
 

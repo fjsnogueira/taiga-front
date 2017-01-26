@@ -24,7 +24,8 @@ InviteMembersFormDirective = () ->
         controller: "InviteMembersFormCtrl",
         controllerAs: "vm",
         bindToController: {
-            contactsToInvite: '='
+            contactsToInvite: '=',
+            emailsToInvite: '='
         }
     }
 
