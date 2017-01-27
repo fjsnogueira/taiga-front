@@ -15,22 +15,30 @@
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
-                ng-model="vm.contactToinvite.role"
+                ng-model="role[0]"
                 ng-options="role.id as role.name for role in vm.roles | toMutable"
                 id="add-member-suggest-role-dropdown"
             )
         li.invite-members-email(
-            ng-repeat="email in vm.emailsToInvite"
+            ng-repeat="email in vm.emailsToInvite | toMutable"
         )
             span.invite-members-single-email {{email}}
+            a.invite-members-single-remove(
+                href=""
+                ng-click="vm.removeInvite(email)"
+                translate="LIGHTBOX.ADD_MEMBER.REMOVE"
+            )
     .invite-members-single-new(ng-if="vm.contactsToInvite.size < 4")
-        tg-svg(
+        tg-svg.invite-members-single-new-btn(
             svg-icon="icon-add"
             ng-click="vm.onDisplayContactList()"
         )
     textarea#invite-members-single-msg(
         ng-model="vm.inviteContacts.message"
+        placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER_INVITATION_TEXT' | translate}}"
     )
     button.button-green.invite-members-single-send(
         ng-click="vm.sendInvites(vm.inviteContacts)"
+        translate="LIGHTBOX.ADD_MEMBER.INVITE"
     )
+    p.invite-members-single-help(translate="LIGHTBOX.ADD_MEMBER.HELP_TEXT")

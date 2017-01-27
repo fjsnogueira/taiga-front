@@ -50,7 +50,8 @@ class AddMembersController
         @.displayContactList = true
 
     inviteEmail: (email) ->
-        @.emailsToInvite = @.emailsToInvite.push(email)
+        @.emailsToInvite.push(email)
+        console.log @.emailsToInvite
         @.displayContactList = true
 
 angular.module("taigaAdmin").controller("AddMembersCtrl", AddMembersController)
