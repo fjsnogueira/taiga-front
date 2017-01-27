@@ -9,11 +9,23 @@
         align-items: center;
         display: flex;
         padding: 0 15rem;
+        position: relative;
     }
 
     .add-member-suggest-filter-input {
         flex: 1;
         margin-right: .25rem;
+    }
+
+    .add-member-suggest-filter-hint {
+        @include font-size(xsmall);
+        color: $gray-light;
+        position: absolute;
+        right: 16rem;
+        top: .5rem;
+        &.to-send {
+            right: 19rem;
+        }
     }
 
     .add-member-suggest-filter-addmail {

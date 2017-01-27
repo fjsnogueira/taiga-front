@@ -5,19 +5,16 @@
             ng-model="vm.contactQuery"
             placeholder="Filter or write email"
             ng-keyup="vm.filterContacts()"
-            ng-if="vm.filteredContacts.size"
         )
-        input.add-member-suggest-filter-input(
-            type="email"
-            ng-model="vm.contactQuery"
-            placeholder="Filter or write email"
-            ng-keyup="vm.filterContacts()"
+        
+        span.add-member-suggest-filter-hint(
             ng-if="!vm.filteredContacts.size"
-            ng-attr-autofocus="{{!vm.filteredContacts.size}}"
-        )
+            ng-class="{'to-send': vm.isEmail()}"
+        ) Add email
+        
         button.add-member-suggest-filter-addmail(
             ng-click="vm.onInviteEmail({email: vm.contactQuery})"
-            ng-if="!vm.filteredContacts.size"
+            ng-if="vm.isEmail()"
         )
             tg-svg(svg-icon="icon-add-user")
     ul.add-member-suggest-list

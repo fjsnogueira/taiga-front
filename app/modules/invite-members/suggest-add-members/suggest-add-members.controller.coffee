@@ -19,11 +19,14 @@
 
 taiga = @.taiga
 
-
 class SuggestAddMembersController
     @.$inject = []
 
     constructor: () ->
+        @.contactQuery = ''
+
+    isEmail: () ->
+        return taiga.isEmail(@.contactQuery)
 
     filterContacts: () ->
         @.filteredContacts = @.contacts.filter( (contact) =>
