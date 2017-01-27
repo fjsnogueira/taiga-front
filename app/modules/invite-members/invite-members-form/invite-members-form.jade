@@ -1,20 +1,21 @@
 .invite-members-form
     ul.invite-members-form-list
         li.invite-members-single(
-            tg-repeat="contact in vm.contactsToInvite track by contact.get(id)"
+            ng-repeat="contact in vm.contactsToInvite | toMutable track by contact.id"
         )
             .invite-members-single-data
                 img.invite-members-single-avatar(
                     tg-avatar="contact"
-                    alt="{{contact.get('full_name')}}"
+                    alt="{{contact.full_name}}"
                 )
-                span.invite-members-single-name {{::contact.full_name}}
+                span.invite-members-single-name {{contact.full_name}}
                 a.invite-members-single-remove(
                     href=""
                     ng-click="vm.removeInvite(contact)"
+                    translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
-                ng-model="role[0]"
+                ng-model="vm.contactToinvite.role"
                 ng-options="role.id as role.name for role in vm.roles | toMutable"
                 id="add-member-suggest-role-dropdown"
             )
@@ -22,7 +23,7 @@
             ng-repeat="email in vm.emailsToInvite"
         )
             span.invite-members-single-email {{email}}
-    .invite-members-single-new(ng-if="vm.contactsToInvite.length < 4")
+    .invite-members-single-new(ng-if="vm.contactsToInvite.size < 4")
         tg-svg(
             svg-icon="icon-add"
             ng-click="vm.onDisplayContactList()"

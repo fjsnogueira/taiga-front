@@ -23,16 +23,15 @@ taiga = @.taiga
 class AddMembersController
     @.$inject = [
         "tgUserService",
-        "tgCurrentUserService",
-        "tgProjectService",
+        "tgCurrentUserService"
     ]
 
-    constructor: (@userService, @currentUserService, @projectService) ->
-        @.roles = @projectService.project.get('roles')
-        @.displayContactList = false
+    constructor: (@userService, @currentUserService) ->
+        @._getContacts()
+
         @.contactsToInvite = Immutable.List()
         @.emailsToInvite = []
-        @._getContacts()
+        @.displayContactList = false
 
     _getContacts: () ->
         currentUser = @currentUserService.getUser()
@@ -46,6 +45,7 @@ class AddMembersController
 
     inviteSuggested: (contact) ->
         @.contactsToInvite = @.contactsToInvite.push(contact)
+        console.log @.contactsToInvite
         @._filterContacts(contact)
         @.displayContactList = true
 

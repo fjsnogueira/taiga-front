@@ -21,9 +21,10 @@ taiga = @.taiga
 
 
 class InviteMembersFormController
-    @.$inject = []
+    @.$inject = ["tgProjectService"]
 
-    constructor: () ->
+    constructor: (@projectService) ->
+        @.roles = @projectService.project.get('roles')
 
     # _getContacts: () ->
     #     currentUser = @currentUserService.getUser()
