@@ -3,14 +3,15 @@
         input.add-member-suggest-filter-input(
             type="text"
             ng-model="vm.contactQuery"
-            placeholder="Filter or write email"
+            placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER' | translate}}"
             ng-keyup="vm.filterContacts()"
         )
         
         span.add-member-suggest-filter-hint(
             ng-if="!vm.filteredContacts.size"
             ng-class="{'to-send': vm.isEmail()}"
-        ) Add email
+            translate="LIGHTBOX.ADD_MEMBER.ADD_EMAIL"
+        )
         
         button.add-member-suggest-filter-addmail(
             ng-click="vm.onInviteEmail({email: vm.contactQuery})"
@@ -20,7 +21,7 @@
     ul.add-member-suggest-list
         li.add-member-suggest-single(
             tg-repeat="contact in vm.filteredContacts"
-            ng-click="vm.inviteSuggested({contact: contact})"
+            ng-click="vm.onInviteSuggested({contact: contact})"
         )
             img.add-member-suggest-avatar(
                 tg-avatar="contact"

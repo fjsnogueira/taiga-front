@@ -5,7 +5,7 @@ tg-lightbox-close
     tg-suggest-add-members(
         ng-show="!vm.displayContactList"
         contacts="vm.contacts"
-        invite-suggested="vm.inviteSuggested(contact)"
+        on-invite-suggested="vm.inviteSuggested(contact)"
         on-invite-email="vm.inviteEmail(email)"
     )
     tg-invite-members-form(
