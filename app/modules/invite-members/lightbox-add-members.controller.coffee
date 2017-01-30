@@ -45,7 +45,7 @@ class AddMembersController
 
     inviteSuggested: (contact) ->
         @.contactsToInvite = @.contactsToInvite.push(contact)
-        console.log @.contactsToInvite
+        console.log @.contactsToInvite.toJS()
         @._filterContacts(contact)
         @.displayContactList = true
 

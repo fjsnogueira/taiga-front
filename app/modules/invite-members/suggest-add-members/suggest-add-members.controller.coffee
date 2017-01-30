@@ -33,4 +33,8 @@ class SuggestAddMembersController
             contact.get('full_name_display').toLowerCase().includes(@.contactQuery.toLowerCase()) || contact.get('username').toLowerCase().includes(@.contactQuery.toLowerCase());
         )
 
+    setInvited: (contact) ->
+        @.contactQuery = ''
+        @.onInviteSuggested({'contact': contact})
+
 angular.module("taigaAdmin").controller("SuggestAddMembersCtrl", SuggestAddMembersController)

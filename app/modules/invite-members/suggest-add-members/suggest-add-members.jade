@@ -21,7 +21,7 @@
     ul.add-member-suggest-list
         li.add-member-suggest-single(
             tg-repeat="contact in vm.filteredContacts"
-            ng-click="vm.onInviteSuggested({contact: contact})"
+            ng-click="vm.setInvited(contact)"
         )
             img.add-member-suggest-avatar(
                 tg-avatar="contact"

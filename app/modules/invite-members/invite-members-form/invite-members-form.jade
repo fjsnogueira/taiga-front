@@ -15,18 +15,24 @@
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
-                ng-model="role[0]"
+                ng-model="contact.role"
                 ng-options="role.id as role.name for role in vm.roles | toMutable"
                 id="add-member-suggest-role-dropdown"
             )
         li.invite-members-email(
             ng-repeat="email in vm.emailsToInvite | toMutable"
         )
-            span.invite-members-single-email {{email}}
-            a.invite-members-single-remove(
-                href=""
-                ng-click="vm.removeInvite(email)"
-                translate="LIGHTBOX.ADD_MEMBER.REMOVE"
+            .invite-members-single-data
+                span.invite-members-single-email {{email}}
+                a.invite-members-single-remove(
+                    href=""
+                    ng-click="vm.removeInvite(email)"
+                    translate="LIGHTBOX.ADD_MEMBER.REMOVE"
+                )
+            select.invite-members-single-role(
+                ng-model="email.role"
+                ng-options="role.id as role.name for role in vm.roles | toMutable"
+                id="add-member-suggest-role-dropdown"
             )
     .invite-members-single-new(ng-if="vm.contactsToInvite.size < 4")
         tg-svg.invite-members-single-new-btn(
