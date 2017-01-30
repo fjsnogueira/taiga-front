@@ -19,7 +19,6 @@
 
 taiga = @.taiga
 
-
 class AddMembersController
     @.$inject = [
         "tgUserService",
@@ -30,7 +29,7 @@ class AddMembersController
         @._getContacts()
 
         @.contactsToInvite = Immutable.List()
-        @.emailsToInvite = []
+        @.emailsToInvite = Immutable.List()
         @.displayContactList = false
 
     _getContacts: () ->
@@ -45,13 +44,12 @@ class AddMembersController
 
     inviteSuggested: (contact) ->
         @.contactsToInvite = @.contactsToInvite.push(contact)
-        console.log @.contactsToInvite.toJS()
         @._filterContacts(contact)
         @.displayContactList = true
 
     inviteEmail: (email) ->
-        @.emailsToInvite.push(email)
-        console.log @.emailsToInvite
+        emailData = Immutable.Map({'email': email})
+        @.emailsToInvite = @.emailsToInvite.push(emailData)
         @.displayContactList = true
 
 angular.module("taigaAdmin").controller("AddMembersCtrl", AddMembersController)

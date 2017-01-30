@@ -1,4 +1,4 @@
-.invite-members-form
+form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
     ul.invite-members-form-list
         li.invite-members-single(
             ng-repeat="contact in vm.contactsToInvite | toMutable track by contact.id"
@@ -15,25 +15,36 @@
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
-                ng-model="contact.role"
-                ng-options="role.id as role.name for role in vm.roles | toMutable"
+                ng-model="vm.rolesValues[contact.username]"
                 id="add-member-suggest-role-dropdown"
+                ng-options="role.id as role.name for role in vm.roles | toMutable track by role.id"
+                required
             )
+                option(
+                    value="" 
+                    selected="selected"
+                    translate="LIGHTBOX.ADD_MEMBER.CHOOSE_ROLE"
+                )
         li.invite-members-email(
-            ng-repeat="email in vm.emailsToInvite | toMutable"
+            ng-repeat="userMail in vm.emailsToInvite | toMutable"
         )
             .invite-members-single-data
-                span.invite-members-single-email {{email}}
+                span.invite-members-single-email {{userMail.email}}
                 a.invite-members-single-remove(
                     href=""
                     ng-click="vm.removeInvite(email)"
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
-                ng-model="email.role"
-                ng-options="role.id as role.name for role in vm.roles | toMutable"
-                id="add-member-suggest-role-dropdown"
+                ng-model="vm.rolesValues[userMail.email]"
+                id="add-email-suggest-role-dropdown"
+                ng-options="role.id as role.name for role in vm.roles | toMutable track by role.id"
+                required
             )
+                option(
+                    value="" 
+                    translate="LIGHTBOX.ADD_MEMBER.CHOOSE_ROLE"
+                )
     .invite-members-single-new(ng-if="vm.contactsToInvite.size < 4")
         tg-svg.invite-members-single-new-btn(
             svg-icon="icon-add"
@@ -44,7 +55,7 @@
         placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER_INVITATION_TEXT' | translate}}"
     )
     button.button-green.invite-members-single-send(
-        ng-click="vm.sendInvites(vm.inviteContacts)"
+        type="submit"
         translate="LIGHTBOX.ADD_MEMBER.INVITE"
     )
     p.invite-members-single-help(translate="LIGHTBOX.ADD_MEMBER.HELP_TEXT")

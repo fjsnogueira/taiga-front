@@ -25,11 +25,18 @@ class InviteMembersFormController
 
     constructor: (@projectService) ->
         @.roles = @projectService.project.get('roles')
+        @.fallbackRole = @.roles.first().get('id')
+        @.rolesValues = {}
 
-    # _getContacts: () ->
-    #     currentUser = @currentUserService.getUser()
-    #     @userService.getContacts(currentUser.get("id")).then (contacts) =>
-    #         @.contacts = contacts
+    sendInvites: () ->
+        @.setInvitedContacts = []
+        _.forEach(@.rolesValues, (key, value) =>
+            @.setInvitedContacts.push({
+                'role_id': key
+                'username': value
+            })
+        )
+        console.log @.setInvitedContacts
 
 
 angular.module("taigaAdmin").controller("InviteMembersFormCtrl", InviteMembersFormController)
