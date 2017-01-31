@@ -53,6 +53,9 @@
             }
         }
     }
+    .invite-members-single-msg {
+        margin-top: 1rem;
+    }
     .invite-members-single-send {
         @include font-size(large);
         display: block;

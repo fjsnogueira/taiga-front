@@ -45,7 +45,7 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
                     value="" 
                     translate="LIGHTBOX.ADD_MEMBER.CHOOSE_ROLE"
                 )
-    .invite-members-single-new(ng-if="vm.contactsToInvite.size < vm.membersLimit")
+    .invite-members-single-new(ng-if="vm.contactsToInvite.size + vm.emailsToInvite.size < vm.membersLimit")
         tg-svg.invite-members-single-new-btn(
             svg-icon="icon-add"
             ng-click="vm.onDisplayContactList()"
@@ -54,7 +54,7 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
         ng-if="vm.showWarningMessage"
         project="vm.project"
     )
-    textarea#invite-members-single-msg(
+    textarea.invite-members-single-msg(
         ng-model="vm.inviteContacts.message"
         placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER_INVITATION_TEXT' | translate}}"
     )
