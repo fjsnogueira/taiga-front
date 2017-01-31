@@ -24,14 +24,23 @@ class InviteMembersFormController
     @.$inject = ["tgProjectService"]
 
     constructor: (@projectService) ->
+        @.project = @projectService.project
         @.roles = @projectService.project.get('roles')
         @.rolesValues = {}
+        @.defaultMaxInvites = 4
 
         Object.defineProperty @, 'areRolesValidated', {
             get: () =>
                 roleIds = _.filter Object.values(@.rolesValues), (it) -> return it
                 return roleIds.length == @.contactsToInvite.size + @.emailsToInvite.size
         }
+
+
+        if @.project.get('max_memberships') == null
+            @.membersLimit = @.defaultMaxInvites
+        else
+            pendingMembersCount = Math.max(@.project.get('max_memberships') - @.project.get('total_memberships'), 0)
+            @.membersLimit = Math.min(pendingMembersCount, @.defaultMaxInvites)
 
     sendInvites: () ->
         @.setInvitedContacts = []
