@@ -53,10 +53,22 @@ class AddMembersController
         )
         invited = Immutable.fromJS(invited)
         @.contacts = @.contacts.push(invited)
+        @.testEmptyContacts()
 
     inviteEmail: (email) ->
         emailData = Immutable.Map({'email': email})
         @.emailsToInvite = @.emailsToInvite.push(emailData)
         @.displayContactList = true
+
+    removeEmail: (invited) ->
+        @.emailsToInvite = @.emailsToInvite.filter( (email) =>
+            return email.get('email') != invited.email
+        )
+        @.testEmptyContacts()
+
+    testEmptyContacts: () ->
+        console.log @.emailsToInvite.size, @.contactsToInvite.size
+        if @.emailsToInvite.size + @.contactsToInvite.size == 0
+            @.displayContactList = false
 
 angular.module("taigaAdmin").controller("AddMembersCtrl", AddMembersController)

@@ -32,7 +32,7 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
                 span.invite-members-single-email {{userMail.email}}
                 a.invite-members-single-remove(
                     href=""
-                    ng-click="vm.onRemoveInvited(email)"
+                    ng-click="vm.onRemoveInvitedEmail({email: userMail})"
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
