@@ -22,15 +22,15 @@ taiga = @.taiga
 class AddMembersController
     @.$inject = [
         "tgUserService",
-        "tgCurrentUserService"
+        "tgCurrentUserService",
     ]
 
     constructor: (@userService, @currentUserService) ->
-        @._getContacts()
-
         @.contactsToInvite = Immutable.List()
         @.emailsToInvite = Immutable.List()
         @.displayContactList = false
+
+        @._getContacts()
 
     _getContacts: () ->
         currentUser = @currentUserService.getUser()
