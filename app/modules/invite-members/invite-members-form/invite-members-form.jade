@@ -45,11 +45,15 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
                     value="" 
                     translate="LIGHTBOX.ADD_MEMBER.CHOOSE_ROLE"
                 )
-    .invite-members-single-new(ng-if="vm.contactsToInvite.size < vm.defaultMaxInvites")
+    .invite-members-single-new(ng-if="vm.contactsToInvite.size < vm.membersLimit")
         tg-svg.invite-members-single-new-btn(
             svg-icon="icon-add"
             ng-click="vm.onDisplayContactList()"
         )
+    tg-lightbox-add-members-warning-message(
+        ng-if="vm.showWarningMessage"
+        project="vm.project"
+    )
     textarea#invite-members-single-msg(
         ng-model="vm.inviteContacts.message"
         placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER_INVITATION_TEXT' | translate}}"

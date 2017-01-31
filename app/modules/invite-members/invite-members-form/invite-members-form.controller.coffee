@@ -42,6 +42,9 @@ class InviteMembersFormController
             pendingMembersCount = Math.max(@.project.get('max_memberships') - @.project.get('total_memberships'), 0)
             @.membersLimit = Math.min(pendingMembersCount, @.defaultMaxInvites)
 
+        @.showWarningMessage = @.membersLimit < @.defaultMaxInvites
+        console.log @.showWarningMessage
+
     sendInvites: () ->
         @.setInvitedContacts = []
         _.forEach(@.rolesValues, (key, value) =>
