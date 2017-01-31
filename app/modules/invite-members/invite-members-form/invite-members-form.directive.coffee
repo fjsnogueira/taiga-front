@@ -24,9 +24,10 @@ InviteMembersFormDirective = () ->
         controller: "InviteMembersFormCtrl",
         controllerAs: "vm",
         bindToController: {
-            contactsToInvite: '=',
+            contactsToInvite: '<',
             emailsToInvite: '=',
-            onDisplayContactList: '&'
+            onDisplayContactList: '&',
+            onRemoveInvitedContact: '&'
         }
     }
 

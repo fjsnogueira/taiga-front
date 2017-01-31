@@ -11,7 +11,7 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
                 span.invite-members-single-name {{contact.full_name}}
                 a.invite-members-single-remove(
                     href=""
-                    ng-click="vm.removeInvite(contact)"
+                    ng-click="vm.onRemoveInvitedContact({contact: contact})"
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(
@@ -32,7 +32,7 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
                 span.invite-members-single-email {{userMail.email}}
                 a.invite-members-single-remove(
                     href=""
-                    ng-click="vm.removeInvite(email)"
+                    ng-click="vm.onRemoveInvited(email)"
                     translate="LIGHTBOX.ADD_MEMBER.REMOVE"
                 )
             select.invite-members-single-role(

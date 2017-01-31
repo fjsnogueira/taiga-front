@@ -47,6 +47,13 @@ class AddMembersController
         @._filterContacts(contact)
         @.displayContactList = true
 
+    removeContact: (invited) ->
+        @.contactsToInvite = @.contactsToInvite.filter( (contact) =>
+            return contact.get('id') != invited.id
+        )
+        invited = Immutable.fromJS(invited)
+        @.contacts = @.contacts.push(invited)
+
     inviteEmail: (email) ->
         emailData = Immutable.Map({'email': email})
         @.emailsToInvite = @.emailsToInvite.push(emailData)
