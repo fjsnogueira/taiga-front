@@ -25,8 +25,13 @@ class InviteMembersFormController
 
     constructor: (@projectService) ->
         @.roles = @projectService.project.get('roles')
-        @.fallbackRole = @.roles.first().get('id')
         @.rolesValues = {}
+
+        Object.defineProperty @, 'areRolesValidated', {
+            get: () =>
+                roleIds = _.filter Object.values(@.rolesValues), (it) -> return it
+                return roleIds.length == @.contactsToInvite.size
+        }
 
     sendInvites: () ->
         @.setInvitedContacts = []
@@ -36,6 +41,7 @@ class InviteMembersFormController
                 'username': value
             })
         )
+        # Send it!!
         console.log @.setInvitedContacts
 
 

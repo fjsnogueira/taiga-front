@@ -57,5 +57,6 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
     button.button-green.invite-members-single-send(
         type="submit"
         translate="LIGHTBOX.ADD_MEMBER.INVITE"
+        ng-disabled="!vm.areRolesValidated"
     )
     p.invite-members-single-help(translate="LIGHTBOX.ADD_MEMBER.HELP_TEXT")
