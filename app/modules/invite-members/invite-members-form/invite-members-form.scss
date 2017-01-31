@@ -3,6 +3,7 @@
     margin: 0 5rem;
     .invite-members-form-list {
         margin: 0;
+        margin-bottom: 1rem;
     }
     .invite-members-single,
     .invite-members-email {
@@ -52,9 +53,6 @@
                 fill: $primary-light;
             }
         }
-    }
-    .invite-members-single-msg {
-        margin-top: 1rem;
     }
     .invite-members-single-send {
         @include font-size(large);

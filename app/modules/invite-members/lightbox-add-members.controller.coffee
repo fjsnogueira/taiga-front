@@ -67,7 +67,6 @@ class AddMembersController
         @.testEmptyContacts()
 
     testEmptyContacts: () ->
-        console.log @.emailsToInvite.size, @.contactsToInvite.size
         if @.emailsToInvite.size + @.contactsToInvite.size == 0
             @.displayContactList = false
 

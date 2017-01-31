@@ -55,12 +55,13 @@ form.invite-members-form(ng-submit="vm.sendInvites(vm.inviteContacts)")
         project="vm.project"
     )
     textarea.invite-members-single-msg(
-        ng-model="vm.inviteContacts.message"
+        ng-model="vm.inviteContactsMessage"
         placeholder="{{'LIGHTBOX.ADD_MEMBER.PLACEHOLDER_INVITATION_TEXT' | translate}}"
     )
     button.button-green.invite-members-single-send(
         type="submit"
         translate="LIGHTBOX.ADD_MEMBER.INVITE"
         ng-disabled="!vm.areRolesValidated"
+        tg-loading="vm.loading"
     )
     p.invite-members-single-help(translate="LIGHTBOX.ADD_MEMBER.HELP_TEXT")

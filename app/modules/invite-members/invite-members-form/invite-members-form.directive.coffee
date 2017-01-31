@@ -28,7 +28,8 @@ InviteMembersFormDirective = () ->
             emailsToInvite: '=',
             onDisplayContactList: '&',
             onRemoveInvitedContact: '&',
-            onRemoveInvitedEmail: '&'
+            onRemoveInvitedEmail: '&',
+            onSendInvites: '&'
         }
     }
 

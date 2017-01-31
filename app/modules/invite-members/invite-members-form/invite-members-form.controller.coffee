@@ -21,12 +21,18 @@ taiga = @.taiga
 
 
 class InviteMembersFormController
-    @.$inject = ["tgProjectService"]
+    @.$inject = [
+        "tgProjectService",
+        "$tgResources",
+        "lightboxService",
+        "$tgConfirm"
+    ]
 
-    constructor: (@projectService) ->
+    constructor: (@projectService, @rs, @lightboxService, @confirm) ->
         @.project = @projectService.project
         @.roles = @projectService.project.get('roles')
         @.rolesValues = {}
+        @.loading = false
         @.defaultMaxInvites = 4
 
         Object.defineProperty @, 'areRolesValidated', {
@@ -43,7 +49,6 @@ class InviteMembersFormController
             @.membersLimit = Math.min(pendingMembersCount, @.defaultMaxInvites)
 
         @.showWarningMessage = @.membersLimit < @.defaultMaxInvites
-        console.log @.showWarningMessage
 
     sendInvites: () ->
         @.setInvitedContacts = []
@@ -53,8 +58,21 @@ class InviteMembersFormController
                 'username': value
             })
         )
-        # Send it!!
-        console.log @.setInvitedContacts
+        @.loading = true
+
+        @rs.memberships.bulkCreateMemberships(
+            @.project.get('id'),
+            @.setInvitedContacts,
+            @.inviteContactsMessage
+        )
+            .then (response) => # On success
+                @.loading = false
+                @lightboxService.closeAll()
+                @confirm.notify('success')
+            .catch (response) => # On error
+                @.loading = false
+                if response.data._error_message
+                    @confirm.notify("error", response.data._error_message)
 
 
 angular.module("taigaAdmin").controller("InviteMembersFormCtrl", InviteMembersFormController)
