@@ -23,9 +23,10 @@ class AddMembersController
     @.$inject = [
         "tgUserService",
         "tgCurrentUserService",
+        "tgProjectService",
     ]
 
-    constructor: (@userService, @currentUserService) ->
+    constructor: (@userService, @currentUserService, @projectService) ->
         @.contactsToInvite = Immutable.List()
         @.emailsToInvite = Immutable.List()
         @.displayContactList = false
@@ -33,8 +34,10 @@ class AddMembersController
         @._getContacts()
 
     _getContacts: () ->
-        currentUser = @currentUserService.getUser()
-        @userService.getContacts(currentUser.get("id")).then (contacts) =>
+        userId = @currentUserService.getUser().get("id")
+        excludeProjectId = @projectService.project.get("id")
+
+        @userService.getContacts(userId, excludeProjectId).then (contacts) =>
             @.contacts = contacts
 
     _filterContacts: (invited) ->
