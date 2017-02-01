@@ -31,8 +31,6 @@ class AddMembersController
         @.emailsToInvite = Immutable.List()
         @.displayContactList = false
 
-        @._getContacts()
-
     _getContacts: () ->
         userId = @currentUserService.getUser().get("id")
         excludeProjectId = @projectService.project.get("id")

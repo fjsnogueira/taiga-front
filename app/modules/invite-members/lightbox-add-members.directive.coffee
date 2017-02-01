@@ -20,6 +20,7 @@
 LightboxAddMembersDirective = (lightboxService) ->
     link = (scope, el, attrs, ctrl) ->
         lightboxService.open(el)
+        ctrl._getContacts()
 
     return {
         scope: {},
