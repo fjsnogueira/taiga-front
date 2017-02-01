@@ -36,13 +36,14 @@ class InviteMembersFormController
         @.loading = false
         @.defaultMaxInvites = 4
 
+    _areRolesValidated: () ->
         Object.defineProperty @, 'areRolesValidated', {
             get: () =>
                 roleIds = _.filter Object.values(@.rolesValues), (it) -> return it
                 return roleIds.length == @.contactsToInvite.size + @.emailsToInvite.size
         }
 
-
+    _checkLimitMemberships: () ->
         if @.project.get('max_memberships') == null
             @.membersLimit = @.defaultMaxInvites
         else
@@ -60,7 +61,6 @@ class InviteMembersFormController
             })
         )
         @.loading = true
-
         @rs.memberships.bulkCreateMemberships(
             @.project.get('id'),
             @.setInvitedContacts,
