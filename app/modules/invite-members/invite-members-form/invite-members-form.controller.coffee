@@ -25,10 +25,11 @@ class InviteMembersFormController
         "tgProjectService",
         "$tgResources",
         "lightboxService",
-        "$tgConfirm"
+        "$tgConfirm",
+        "$rootScope"
     ]
 
-    constructor: (@projectService, @rs, @lightboxService, @confirm) ->
+    constructor: (@projectService, @rs, @lightboxService, @confirm, @rootScope) ->
         @.project = @projectService.project
         @.roles = @projectService.project.get('roles')
         @.rolesValues = {}
@@ -68,6 +69,7 @@ class InviteMembersFormController
             .then (response) => # On success
                 @.loading = false
                 @lightboxService.closeAll()
+                @rootScope.$broadcast("membersform:new:success")
                 @confirm.notify('success')
             .catch (response) => # On error
                 @.loading = false
