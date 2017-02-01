@@ -23,7 +23,6 @@ class SuggestAddMembersController
     @.$inject = []
 
     constructor: () ->
-        @.contactQuery = ''
 
     isEmail: () ->
         return taiga.isEmail(@.contactQuery)
@@ -34,7 +33,6 @@ class SuggestAddMembersController
         )
 
     setInvited: (contact) ->
-        @.contactQuery = ''
         @.onInviteSuggested({'contact': contact})
 
 angular.module("taigaAdmin").controller("SuggestAddMembersCtrl", SuggestAddMembersController)
