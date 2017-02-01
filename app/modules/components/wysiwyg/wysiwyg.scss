@@ -253,3 +253,7 @@ tg-wysiwyg {
 .medium-editor-toolbar li .medium-editor-button-active {
     color: $primary-light;
 }
+
+.medium-editor-toolbar svg {
+    fill: $white;
+}
